@@ -27,7 +27,11 @@ export default function Footer() {
     const interval = setInterval(updateTime, 1000);
 
     // Set build number once at client render
-    setBuildNumber(Math.floor(Date.now() / 1000).toString().slice(-6));
+    setBuildNumber(
+      Math.floor(Date.now() / 1000)
+        .toString()
+        .slice(-6)
+    );
 
     return () => clearInterval(interval);
   }, []);
@@ -191,8 +195,7 @@ export default function Footer() {
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{
                           duration: 0.4,
-                          delay:
-                            0.2 + sectionIndex * 0.1 + linkIndex * 0.05,
+                          delay: 0.2 + sectionIndex * 0.1 + linkIndex * 0.05,
                         }}
                       >
                         <Link
@@ -207,8 +210,7 @@ export default function Footer() {
                               className="absolute -bottom-0.5 left-0 h-px bg-gradient-to-r from-zinc-400 to-zinc-800"
                               initial={{ width: 0 }}
                               animate={{
-                                width:
-                                  hoveredLink === link.name ? "100%" : 0,
+                                width: hoveredLink === link.name ? "100%" : 0,
                               }}
                               transition={{ duration: 0.3 }}
                             />
@@ -216,15 +218,10 @@ export default function Footer() {
                           <motion.div
                             className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             animate={
-                              hoveredLink === link.name
-                                ? { x: 2 }
-                                : { x: 0 }
+                              hoveredLink === link.name ? { x: 2 } : { x: 0 }
                             }
                           >
-                            <ExternalLink
-                              size={12}
-                              className="text-zinc-400"
-                            />
+                            <ExternalLink size={12} className="text-zinc-400" />
                           </motion.div>
                         </Link>
                       </motion.li>
@@ -293,6 +290,15 @@ export default function Footer() {
             </div>
           </div>
         </motion.div>
+      </div>
+      <div className="text-xs text-zinc-50 flex justify-center">
+        Looking for{" "}
+        <Link
+          href="/synclist"
+        >
+          Synclist (often misspelled) — SynkList
+        </Link>
+        ?
       </div>
     </footer>
   );

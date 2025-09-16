@@ -61,6 +61,22 @@ SYNKLIST FRAMEWORK
 | Slack | `OPERATIONAL` | 201ms | 99.91% |
 | WhatsApp Business API | `OPERATIONAL` | 89ms | 99.94% |
 
+## SEO & Crawlers
+
+```bash
+  Sitemap: app/sitemap.ts
+  Robots: app/robots.ts (allows major crawlers + AI bots by default)
+  AI policy: app/ai.txt/route.ts
+  Open Graph: dynamic image at app/opengraph-image.tsx
+  Use in metadata via openGraph.images: ["/opengraph-image"]
+  Organization JSON-LD: in app/layout.tsx <head> (includes alternateName: "Synclist")
+  Misspelling support (helps brand queries): app/synclist/page.tsx + listed in app/sitemap.ts.
+```
+
+### Search Console
+
+Verify ownership via DNS (domain property), and optionally keep HTML file (/public/googleXXXX.html) + meta tag (in metadata.verification.google) as backups. Submit /sitemap.xml, then request indexing for /, /features, /docs, /synclist.
+
 ## Quick Start Protocol
 
 ### Prerequisites
