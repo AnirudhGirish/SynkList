@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://synklist.com";
 const staticRoutes = [
   "/", "/about", "/blog", "/careers", "/compliance", "/contact", "/cookies",
   "/docs", "/features", "/integration", "/pricing", "/privacy",
-  "/security", "/status", "/terms",
+  "/security", "/status", "/terms","/synclist",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
