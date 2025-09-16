@@ -12,11 +12,14 @@ export default function ScrollToTopCircle() {
       const windowHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
-      const progress = totalScroll / windowHeight;
-      setScrollProgress(progress);
+
+      const progress = windowHeight > 0 ? totalScroll / windowHeight : 0;
+
+      setScrollProgress(Math.min(Math.max(progress, 0), 1)); // clamp between 0 and 1
     };
 
     window.addEventListener("scroll", updateProgress);
+    updateProgress(); // run once on mount
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
@@ -27,7 +30,7 @@ export default function ScrollToTopCircle() {
   const offset = circumference - scrollProgress * circumference;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 10, behavior: "auto" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

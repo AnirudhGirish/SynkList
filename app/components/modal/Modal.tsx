@@ -33,34 +33,34 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
   }, [open]);
 
   // 🔒 Scroll lock when modal is open
-  useEffect(() => {
-    if (open) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.overflowY = "scroll"; // keep scrollbar width consistent
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflowY = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
-      }
-    }
+  // useEffect(() => {
+  //   if (open) {
+  //     const scrollY = window.scrollY;
+  //     document.body.style.position = "fixed";
+  //     document.body.style.top = `-${scrollY}px`;
+  //     document.body.style.left = "0";
+  //     document.body.style.right = "0";
+  //     document.body.style.overflowY = "scroll"; // keep scrollbar width consistent
+  //   } else {
+  //     const scrollY = document.body.style.top;
+  //     document.body.style.position = "";
+  //     document.body.style.top = "";
+  //     document.body.style.left = "";
+  //     document.body.style.right = "";
+  //     document.body.style.overflowY = "";
+  //     if (scrollY) {
+  //       window.scrollTo(0, parseInt(scrollY || "0") * -1);
+  //     }
+  //   }
 
-    return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflowY = "";
-    };
-  }, [open]);
+  //   return () => {
+  //     document.body.style.position = "";
+  //     document.body.style.top = "";
+  //     document.body.style.left = "";
+  //     document.body.style.right = "";
+  //     document.body.style.overflowY = "";
+  //   };
+  // }, [open]);
 
   return (
     <AnimatePresence>
@@ -149,7 +149,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
               {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute top-6 left-8 group relative w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-100/80 via-white/70 to-zinc-200/60 border border-zinc-300/50 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center overflow-hidden backdrop-blur-sm transition-all duration-150 ease-in-out active:scale-95 active:translate-y-[2px]"
+                className="absolute top-6 left-8 z-50 group relative w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-100/80 via-white/70 to-zinc-200/60 border border-zinc-300/50 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center overflow-hidden backdrop-blur-sm transition-all duration-150 ease-in-out active:scale-95 active:translate-y-[2px]"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-zinc-200/50 via-transparent to-zinc-300/30 rounded-2xl"
@@ -165,7 +165,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
                 />
 
                 <motion.div
-                  className="relative z-10"
+                  className="relative z-50"
                   animate={
                     glitchActive
                       ? { rotate: [0, -10, 10, 0], scale: [1, 0.9, 1.1, 1] }
