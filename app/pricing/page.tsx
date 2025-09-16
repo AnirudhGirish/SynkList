@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { DollarSign } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const PricingPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const PricingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,8 @@ const PricingPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Transparent pricing designed to scale with your productivity needs. No hidden fees, no surprises.
+                Transparent pricing designed to scale with your productivity
+                needs. No hidden fees, no surprises.
               </p>
             </motion.div>
 
@@ -145,7 +152,8 @@ const PricingPage = () => {
                       Value-Driven Plans
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Choose the plan that fits your workflow. Upgrade or downgrade anytime with no long-term commitments.
+                      Choose the plan that fits your workflow. Upgrade or
+                      downgrade anytime with no long-term commitments.
                     </p>
                   </div>
 
@@ -316,7 +324,9 @@ const PricingPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re finalizing our pricing structure with competitive rates, transparent billing, and flexible plans that scale with your team. Early access members get exclusive pricing.
+              We&apos;re finalizing our pricing structure with competitive
+              rates, transparent billing, and flexible plans that scale with
+              your team. Early access members get exclusive pricing.
             </motion.p>
 
             <motion.div

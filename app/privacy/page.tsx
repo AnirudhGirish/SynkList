@@ -4,6 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Shield, Eye, Lock, Database, MessageSquare } from "lucide-react";
 import { IconBrandWhatsapp, IconBrandMeta } from "@tabler/icons-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 // ---- NOTE: Key mobile fixes ----
 // 1) Ensure background stays behind content using -z-10 and wrapper relative
@@ -57,6 +59,10 @@ const PrivacyPolicyPage = () => {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-transparent via-zinc-50/30 to-white text-zinc-800 pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern (kept behind content explicitly) */}
       <div className="absolute inset-0 pointer-events-none -z-10">
         <motion.div

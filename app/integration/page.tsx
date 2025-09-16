@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const IntegrationPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const IntegrationPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div

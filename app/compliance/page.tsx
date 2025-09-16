@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { CheckCircle } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const CompliancePage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const CompliancePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,8 @@ const CompliancePage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Meeting the highest standards for data protection, privacy regulations, and industry compliance across global markets.
+                Meeting the highest standards for data protection, privacy
+                regulations, and industry compliance across global markets.
               </p>
             </motion.div>
 
@@ -145,7 +152,9 @@ const CompliancePage = () => {
                       Global Regulatory Compliance
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Adhering to international standards including GDPR, CCPA, SOC 2, and industry-specific regulations to protect your data.
+                      Adhering to international standards including GDPR, CCPA,
+                      SOC 2, and industry-specific regulations to protect your
+                      data.
                     </p>
                   </div>
 
@@ -212,31 +221,27 @@ const CompliancePage = () => {
 
                   <div className="flex flex-col lg:flex-row gap-6 items-center justify-center lg:mt-[-3rem]">
                     {/* Compliance standards */}
-                    {[
-                      "GDPR",
-                      "CCPA",
-                      "SOC 2",
-                      "ISO 27001",
-                      "HIPAA",
-                    ].map((standard, index) => (
-                      <motion.div
-                        key={standard}
-                        className="w-20 h-12 rounded-xl bg-zinc-100/70 border border-zinc-300/50 flex items-center justify-center backdrop-blur-sm"
-                        animate={{
-                          y: [0, -4, 0],
-                          opacity: [0.7, 1, 0.7],
-                        }}
-                        transition={{
-                          duration: 3 + index * 0.5,
-                          repeat: Infinity,
-                          delay: index * 0.3,
-                        }}
-                      >
-                        <span className="text-xs font-medium text-zinc-700 text-center">
-                          {standard}
-                        </span>
-                      </motion.div>
-                    ))}
+                    {["GDPR", "CCPA", "SOC 2", "ISO 27001", "HIPAA"].map(
+                      (standard, index) => (
+                        <motion.div
+                          key={standard}
+                          className="w-20 h-12 rounded-xl bg-zinc-100/70 border border-zinc-300/50 flex items-center justify-center backdrop-blur-sm"
+                          animate={{
+                            y: [0, -4, 0],
+                            opacity: [0.7, 1, 0.7],
+                          }}
+                          transition={{
+                            duration: 3 + index * 0.5,
+                            repeat: Infinity,
+                            delay: index * 0.3,
+                          }}
+                        >
+                          <span className="text-xs font-medium text-zinc-700 text-center">
+                            {standard}
+                          </span>
+                        </motion.div>
+                      )
+                    )}
                   </div>
                 </div>
 
@@ -259,9 +264,7 @@ const CompliancePage = () => {
                         COMPLIANCE VERIFIED
                       </span>
                     </div>
-                    <span className="text-zinc-600 font-mono">
-                      5 STANDARDS
-                    </span>
+                    <span className="text-zinc-600 font-mono">5 STANDARDS</span>
                   </div>
                 </div>
               </div>
@@ -317,7 +320,9 @@ const CompliancePage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re preparing comprehensive compliance documentation including audit reports, certifications, regulatory assessments, and detailed privacy impact analyses for enterprise customers.
+              We&apos;re preparing comprehensive compliance documentation
+              including audit reports, certifications, regulatory assessments,
+              and detailed privacy impact analyses for enterprise customers.
             </motion.p>
 
             <motion.div

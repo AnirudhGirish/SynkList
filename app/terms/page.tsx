@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { FileText } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const TermsOfServicePage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const TermsOfServicePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -41,7 +47,6 @@ const TermsOfServicePage = () => {
           }}
         />
       </div>
-
       <main ref={containerRef} className="relative">
         {/* Hero Section */}
         <section className="relative py-20 px-6">
@@ -108,7 +113,9 @@ const TermsOfServicePage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Clear, fair terms governing your use of SynkList services, designed to protect both users and our platform while enabling seamless AI productivity.
+                Clear, fair terms governing your use of SynkList services,
+                designed to protect both users and our platform while enabling
+                seamless AI productivity.
               </p>
             </motion.div>
 
@@ -145,7 +152,9 @@ const TermsOfServicePage = () => {
                       Transparent Legal Terms
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Fair and understandable terms that establish mutual rights and responsibilities for using SynkList&apos;s AI-powered productivity platform.
+                      Fair and understandable terms that establish mutual rights
+                      and responsibilities for using SynkList&apos;s AI-powered
+                      productivity platform.
                     </p>
                   </div>
 
@@ -316,7 +325,9 @@ const TermsOfServicePage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re crafting comprehensive terms of service with clear language, fair policies, and transparent conditions that protect both users and platform integrity while enabling AI innovation.
+              We&apos;re crafting comprehensive terms of service with clear
+              language, fair policies, and transparent conditions that protect
+              both users and platform integrity while enabling AI innovation.
             </motion.p>
 
             <motion.div

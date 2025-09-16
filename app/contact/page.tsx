@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const ContactPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,9 @@ const ContactPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Connect with our team for support, partnerships, feedback, or general inquiries about SynkList and our AI productivity solutions.
+                Connect with our team for support, partnerships, feedback, or
+                general inquiries about SynkList and our AI productivity
+                solutions.
               </p>
             </motion.div>
 
@@ -145,7 +153,9 @@ const ContactPage = () => {
                       Direct Communication
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Multiple channels to reach our team. We prioritize responsive communication and value every inquiry from our community.
+                      Multiple channels to reach our team. We prioritize
+                      responsive communication and value every inquiry from our
+                      community.
                     </p>
                   </div>
 
@@ -258,9 +268,7 @@ const ContactPage = () => {
                         CONTACT SYSTEM ACTIVE
                       </span>
                     </div>
-                    <span className="text-zinc-600 font-mono">
-                      4 CHANNELS
-                    </span>
+                    <span className="text-zinc-600 font-mono">4 CHANNELS</span>
                   </div>
                 </div>
               </div>
@@ -316,7 +324,9 @@ const ContactPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re setting up comprehensive support channels including email, chat, documentation, and community forums. Direct contact information and response times will be available soon.
+              We&apos;re setting up comprehensive support channels including
+              email, chat, documentation, and community forums. Direct contact
+              information and response times will be available soon.
             </motion.p>
 
             <motion.div

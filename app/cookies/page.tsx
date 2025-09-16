@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Cookie } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const CookiePolicyPage = () => {
   const containerRef = useRef(null);
@@ -22,7 +24,10 @@ const CookiePolicyPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
-      {/* Background pattern */}
+      {/* Background pattern */} <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute inset-0 opacity-[1]"
@@ -41,7 +46,6 @@ const CookiePolicyPage = () => {
           }}
         />
       </div>
-
       <main ref={containerRef} className="relative">
         {/* Hero Section */}
         <section className="relative py-20 px-6">
@@ -108,7 +112,9 @@ const CookiePolicyPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Transparent information about how we use cookies and similar technologies to enhance your experience while respecting your privacy.
+                Transparent information about how we use cookies and similar
+                technologies to enhance your experience while respecting your
+                privacy.
               </p>
             </motion.div>
 
@@ -145,7 +151,9 @@ const CookiePolicyPage = () => {
                       Minimal Data Collection
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      We use essential cookies only for core functionality and security. No unnecessary tracking or third-party analytics cookies.
+                      We use essential cookies only for core functionality and
+                      security. No unnecessary tracking or third-party analytics
+                      cookies.
                     </p>
                   </div>
 
@@ -316,7 +324,9 @@ const CookiePolicyPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re finalizing our comprehensive cookie policy with detailed explanations of all tracking technologies, user controls, and opt-out mechanisms in compliance with global privacy laws.
+              We&apos;re finalizing our comprehensive cookie policy with
+              detailed explanations of all tracking technologies, user controls,
+              and opt-out mechanisms in compliance with global privacy laws.
             </motion.p>
 
             <motion.div

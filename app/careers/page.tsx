@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Briefcase } from "lucide-react";
+import KeyScroller from "@/components/KeyScroll";
+import ScrollToTopCircle from "@/components/Scroll";
 
 const CareersPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const CareersPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,9 @@ const CareersPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Join a passionate team building the next generation of AI-powered productivity tools. Shape the future of human-computer interaction.
+                Join a passionate team building the next generation of
+                AI-powered productivity tools. Shape the future of
+                human-computer interaction.
               </p>
             </motion.div>
 
@@ -145,7 +153,9 @@ const CareersPage = () => {
                       Innovative Team Culture
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Work with brilliant minds passionate about AI, privacy, and creating tools that genuinely improve how people work and collaborate.
+                      Work with brilliant minds passionate about AI, privacy,
+                      and creating tools that genuinely improve how people work
+                      and collaborate.
                     </p>
                   </div>
 
@@ -316,7 +326,9 @@ const CareersPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re building our founding team with exceptional talent. Job postings, application processes, and team culture details will be available as we scale our operations.
+              We&apos;re building our founding team with exceptional talent. Job
+              postings, application processes, and team culture details will be
+              available as we scale our operations.
             </motion.p>
 
             <motion.div

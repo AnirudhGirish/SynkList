@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { FileText } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const BlogPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,12 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
+
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +116,8 @@ const BlogPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Discover the latest in AI productivity, feature updates, and insights from the SynkList team on the future of work.
+                Discover the latest in AI productivity, feature updates, and
+                insights from the SynkList team on the future of work.
               </p>
             </motion.div>
 
@@ -145,7 +154,9 @@ const BlogPage = () => {
                       Knowledge Sharing
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Explore our thoughts on AI, productivity, privacy, and the future of human-computer interaction through our upcoming blog platform.
+                      Explore our thoughts on AI, productivity, privacy, and the
+                      future of human-computer interaction through our upcoming
+                      blog platform.
                     </p>
                   </div>
 
@@ -316,7 +327,9 @@ const BlogPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re developing a comprehensive blog platform featuring technical deep-dives, product insights, AI research findings, and productivity tips from our engineering team.
+              We&apos;re developing a comprehensive blog platform featuring
+              technical deep-dives, product insights, AI research findings, and
+              productivity tips from our engineering team.
             </motion.p>
 
             <motion.div

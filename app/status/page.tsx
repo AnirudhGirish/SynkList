@@ -1,7 +1,17 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect, type ReactNode } from "react";
-import { Activity, Zap, Shield, Globe, MessageSquare, Calendar, Mail } from "lucide-react";
+import {
+  Activity,
+  Zap,
+  Shield,
+  Globe,
+  MessageSquare,
+  Calendar,
+  Mail,
+} from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const StatusPage = () => {
   const containerRef = useRef(null);
@@ -51,23 +61,23 @@ const StatusPage = () => {
       uptime: "99.98%",
       responseTime: "145ms",
       icon: <Zap size={20} />,
-      lastIncident: "No incidents in 30 days"
+      lastIncident: "No incidents in 30 days",
     },
     {
       name: "WhatsApp Gateway",
-      status: "operational", 
+      status: "operational",
       uptime: "99.94%",
       responseTime: "89ms",
       icon: <MessageSquare size={20} />,
-      lastIncident: "No incidents in 15 days"
+      lastIncident: "No incidents in 15 days",
     },
     {
       name: "Gmail Integration",
       status: "operational",
       uptime: "99.97%",
-      responseTime: "234ms", 
+      responseTime: "234ms",
       icon: <Mail size={20} />,
-      lastIncident: "No incidents in 45 days"
+      lastIncident: "No incidents in 45 days",
     },
     {
       name: "Calendar Sync",
@@ -75,7 +85,7 @@ const StatusPage = () => {
       uptime: "99.99%",
       responseTime: "112ms",
       icon: <Calendar size={20} />,
-      lastIncident: "No incidents in 60 days"
+      lastIncident: "No incidents in 60 days",
     },
     {
       name: "Security Layer",
@@ -83,24 +93,28 @@ const StatusPage = () => {
       uptime: "100%",
       responseTime: "23ms",
       icon: <Shield size={20} />,
-      lastIncident: "No incidents in 90 days"
+      lastIncident: "No incidents in 90 days",
     },
     {
       name: "Global CDN",
-      status: "operational", 
+      status: "operational",
       uptime: "99.95%",
       responseTime: "67ms",
       icon: <Globe size={20} />,
-      lastIncident: "No incidents in 7 days"
-    }
+      lastIncident: "No incidents in 7 days",
+    },
   ];
 
   const getStatusColor = (status: ServiceStatus): string => {
     switch (status) {
-      case "operational": return "zinc-600";
-      case "degraded": return "yellow-500";
-      case "outage": return "red-500";
-      default: return "zinc-400";
+      case "operational":
+        return "zinc-600";
+      case "degraded":
+        return "yellow-500";
+      case "outage":
+        return "red-500";
+      default:
+        return "zinc-400";
     }
   };
 
@@ -110,26 +124,30 @@ const StatusPage = () => {
       title: "Gmail API Rate Limiting",
       status: "resolved",
       duration: "23 minutes",
-      impact: "Minor delays in email processing"
+      impact: "Minor delays in email processing",
     },
     {
-      date: "2024-08-15", 
+      date: "2024-08-15",
       title: "Scheduled Maintenance",
       status: "completed",
       duration: "2 hours",
-      impact: "Planned system updates"
+      impact: "Planned system updates",
     },
     {
       date: "2024-08-03",
       title: "WhatsApp Gateway Timeout",
-      status: "resolved", 
+      status: "resolved",
       duration: "8 minutes",
-      impact: "Delayed message delivery"
-    }
+      impact: "Delayed message delivery",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -227,18 +245,31 @@ const StatusPage = () => {
                     repeat: Infinity,
                   }}
                 />
-                <span className="text-lg font-medium text-zinc-700">All Systems Operational</span>
+                <span className="text-lg font-medium text-zinc-700">
+                  All Systems Operational
+                </span>
               </div>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Real-time monitoring of SynkList infrastructure, AI services, and third-party integrations. Updated every 30 seconds.
+                Real-time monitoring of SynkList infrastructure, AI services,
+                and third-party integrations. Updated every 30 seconds.
               </p>
 
-              <div className="mt-6 text-sm text-zinc-500 font-mono" suppressHydrationWarning>
-                Last updated: {currentTime ? new Intl.DateTimeFormat(undefined, {
-                  year: 'numeric', month: '2-digit', day: '2-digit',
-                  hour: '2-digit', minute: '2-digit', second: '2-digit'
-                }).format(currentTime) : '—'}
+              <div
+                className="mt-6 text-sm text-zinc-500 font-mono"
+                suppressHydrationWarning
+              >
+                Last updated:{" "}
+                {currentTime
+                  ? new Intl.DateTimeFormat(undefined, {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    }).format(currentTime)
+                  : "—"}
               </div>
             </motion.div>
 
@@ -275,15 +306,14 @@ const StatusPage = () => {
                       Infrastructure Health
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Real-time status monitoring of core services, integrations, and system performance metrics.
+                      Real-time status monitoring of core services,
+                      integrations, and system performance metrics.
                     </p>
                   </div>
 
                   <div className="flex gap-2 justify-center">
                     {systemServices.slice(0, 6).map((service, index) => (
-                      <motion.div
-                        key={service.name}
-                      >
+                      <motion.div key={service.name}>
                         <motion.div
                           className="w-10 h-10 rounded-lg bg-gradient-to-br from-zinc-100/80 to-zinc-200/60 border border-zinc-300/50 flex items-center justify-center backdrop-blur-sm"
                           animate={
@@ -369,7 +399,6 @@ const StatusPage = () => {
                     </motion.div>
 
                     {/* Orbiting service indicators */}
-                    
                   </div>
 
                   {/* Service Status Grid */}
@@ -384,13 +413,15 @@ const StatusPage = () => {
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
-                            <div className="text-zinc-600">
-                              {service.icon}
-                            </div>
-                            <span className="font-medium text-zinc-900 text-sm">{service.name}</span>
+                            <div className="text-zinc-600">{service.icon}</div>
+                            <span className="font-medium text-zinc-900 text-sm">
+                              {service.name}
+                            </span>
                           </div>
                           <motion.div
-                            className={`w-2 h-2 bg-${getStatusColor(service.status)} rounded-full`}
+                            className={`w-2 h-2 bg-${getStatusColor(
+                              service.status
+                            )} rounded-full`}
                             animate={{
                               scale: [1, 1.2, 1],
                               opacity: [0.7, 1, 0.7],
@@ -409,7 +440,9 @@ const StatusPage = () => {
                           </div>
                           <div className="flex justify-between">
                             <span>Response:</span>
-                            <span className="font-mono">{service.responseTime}</span>
+                            <span className="font-mono">
+                              {service.responseTime}
+                            </span>
                           </div>
                           <div className="text-zinc-500 text-xs mt-2">
                             {service.lastIncident}
@@ -467,7 +500,8 @@ const StatusPage = () => {
                       Recent Incidents
                     </h3>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Historical view of system incidents, maintenance windows, and resolution times.
+                      Historical view of system incidents, maintenance windows,
+                      and resolution times.
                     </p>
                   </div>
 
@@ -483,7 +517,9 @@ const StatusPage = () => {
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
                             <div className="w-2 h-2 bg-zinc-400 rounded-full" />
-                            <span className="font-medium text-zinc-900">{incident.title}</span>
+                            <span className="font-medium text-zinc-900">
+                              {incident.title}
+                            </span>
                             <span className="text-xs bg-zinc-100 px-2 py-1 rounded text-zinc-600">
                               {incident.status}
                             </span>
@@ -493,8 +529,12 @@ const StatusPage = () => {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm font-mono text-zinc-500">{incident.date}</div>
-                          <div className="text-xs text-zinc-400">{incident.duration}</div>
+                          <div className="text-sm font-mono text-zinc-500">
+                            {incident.date}
+                          </div>
+                          <div className="text-xs text-zinc-400">
+                            {incident.duration}
+                          </div>
                         </div>
                       </motion.div>
                     ))}

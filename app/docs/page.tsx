@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { BookOpen } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const DocsPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const DocsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,8 @@ const DocsPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Comprehensive guides, API references, and tutorials to help you master SynkList&apos;s powerful AI capabilities.
+                Comprehensive guides, API references, and tutorials to help you
+                master SynkList&apos;s powerful AI capabilities.
               </p>
             </motion.div>
 
@@ -145,7 +152,9 @@ const DocsPage = () => {
                       Complete Developer Resources
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      From quick start guides to advanced integrations, everything you need to unlock SynkList&apos;s full potential for your workflow.
+                      From quick start guides to advanced integrations,
+                      everything you need to unlock SynkList&apos;s full
+                      potential for your workflow.
                     </p>
                   </div>
 
@@ -258,9 +267,7 @@ const DocsPage = () => {
                         DOCS ENGINE READY
                       </span>
                     </div>
-                    <span className="text-zinc-600 font-mono">
-                      4 SECTIONS
-                    </span>
+                    <span className="text-zinc-600 font-mono">4 SECTIONS</span>
                   </div>
                 </div>
               </div>
@@ -316,7 +323,9 @@ const DocsPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re building comprehensive documentation with interactive examples, step-by-step tutorials, and complete API references. Every feature will have detailed guides with real-world use cases.
+              We&apos;re building comprehensive documentation with interactive
+              examples, step-by-step tutorials, and complete API references.
+              Every feature will have detailed guides with real-world use cases.
             </motion.p>
 
             <motion.div

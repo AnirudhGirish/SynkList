@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Shield } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const SecurityPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,10 @@ const SecurityPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +114,8 @@ const SecurityPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Military-grade encryption and zero-knowledge architecture designed to protect your data with absolute privacy.
+                Military-grade encryption and zero-knowledge architecture
+                designed to protect your data with absolute privacy.
               </p>
             </motion.div>
 
@@ -145,7 +152,9 @@ const SecurityPage = () => {
                       Zero-Knowledge Architecture
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      Your data remains completely private with end-to-end encryption that ensures only you have access to your information.
+                      Your data remains completely private with end-to-end
+                      encryption that ensures only you have access to your
+                      information.
                     </p>
                   </div>
 
@@ -258,9 +267,7 @@ const SecurityPage = () => {
                         SECURITY ACTIVE
                       </span>
                     </div>
-                    <span className="text-zinc-600 font-mono">
-                      256-BIT AES
-                    </span>
+                    <span className="text-zinc-600 font-mono">256-BIT AES</span>
                   </div>
                 </div>
               </div>
@@ -316,7 +323,9 @@ const SecurityPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re preparing comprehensive security documentation including technical specifications, compliance certifications, and detailed privacy architecture explanations.
+              We&apos;re preparing comprehensive security documentation
+              including technical specifications, compliance certifications, and
+              detailed privacy architecture explanations.
             </motion.p>
 
             <motion.div

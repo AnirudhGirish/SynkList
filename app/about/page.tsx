@@ -2,6 +2,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Users } from "lucide-react";
+import ScrollToTopCircle from "@/components/Scroll";
+import KeyScroller from "@/components/KeyScroll";
 
 const AboutPage = () => {
   const containerRef = useRef(null);
@@ -22,6 +24,12 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
+      <KeyScroller disabled={false} amountPx={100} />
+
+      <div className="hidden lg:block">
+        <ScrollToTopCircle />
+      </div>
+
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -108,7 +116,8 @@ const AboutPage = () => {
               </motion.h1>
 
               <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
-                Building the future of productivity through intelligent AI integration and privacy-first design principles.
+                Building the future of productivity through intelligent AI
+                integration and privacy-first design principles.
               </p>
             </motion.div>
 
@@ -145,7 +154,10 @@ const AboutPage = () => {
                       Mission & Vision
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
-                      We believe productivity shouldn&apos;t require sacrificing privacy or learning complex new tools. SynkList bridges the gap between advanced AI capabilities and familiar interfaces.
+                      We believe productivity shouldn&apos;t require sacrificing
+                      privacy or learning complex new tools. SynkList bridges
+                      the gap between advanced AI capabilities and familiar
+                      interfaces.
                     </p>
                   </div>
 
@@ -316,7 +328,9 @@ const AboutPage = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              We&apos;re crafting our company story, team profiles, and vision for the future. Learn about the minds behind SynkList and our journey to revolutionize productivity through AI.
+              We&apos;re crafting our company story, team profiles, and vision
+              for the future. Learn about the minds behind SynkList and our
+              journey to revolutionize productivity through AI.
             </motion.p>
 
             <motion.div
