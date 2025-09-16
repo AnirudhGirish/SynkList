@@ -24,7 +24,7 @@ const CookiePolicyPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white pt-16">
-      {/* Background pattern */} <KeyScroller disabled={false} amountPx={100} />
+      {/* Background pattern */} <KeyScroller disabled={false} amountPx={60} />
       <div className="hidden lg:block">
         <ScrollToTopCircle />
       </div>

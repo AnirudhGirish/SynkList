@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <KeyScroller disabled={isModalOpen} amountPx={260}/>
+      <KeyScroller disabled={isModalOpen} amountPx={130}/> 
       <Hero onOpenWaitlist={() => setIsModalOpen(true)} />
 
       <SystemFlowDiagram />

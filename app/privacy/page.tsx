@@ -59,7 +59,7 @@ const PrivacyPolicyPage = () => {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-transparent via-zinc-50/30 to-white text-zinc-800 pt-16">
-      <KeyScroller disabled={false} amountPx={100} />
+      <KeyScroller disabled={false} amountPx={60} />
       <div className="hidden lg:block">
         <ScrollToTopCircle />
       </div>
