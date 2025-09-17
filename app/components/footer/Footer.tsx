@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Github, Twitter, Linkedin, Mail, ExternalLink } from "lucide-react";
@@ -123,6 +124,7 @@ export default function Footer() {
               >
                 {/* Logo */}
                 <div className="relative mb-6">
+                  <Image alt="SynkList Logo" src={"/icon-512.png"} width={45} height={45}/>
                   <motion.h3
                     className="text-3xl font-bold bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent"
                     animate={{

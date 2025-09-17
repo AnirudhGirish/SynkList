@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import Image from "next/image";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -117,22 +118,15 @@ const mouseX = useMotionValue(0);
             }`}
           >
             {/* Logo */}
-            <Link href="/" className="relative group">
+            <Link href="/" className="relative group items-center inline-flex transition-all duration-600 ease-out">
+              <Image alt="SynkList Logo" src={"/icon-512.png"} width={45} height={45}/>
               <motion.h1
-                className="font-bold text-3xl bg-gradient-to-b from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent"
+                className={`font-bold text-3xl bg-gradient-to-b from-zinc-900 via-zinc-600 to-zinc-900 bg-clip-text text-transparent ${scrolled ?"hidden": "block"} transition-all duration-600 ease-linear`}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
                 SynkList
               </motion.h1>
-              
-              {/* Subtle scan line on hover */}
-              <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-400/60 to-transparent"
-                initial={{ scaleX: 0, opacity: 0 }}
-                whileHover={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
             </Link>
 
             {/* Desktop Navigation */}
