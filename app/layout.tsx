@@ -80,13 +80,12 @@ const orgLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/icon-512.png`,
   sameAs: [
-    "https://github.com/synklist",     // replace with real URLs you control
-    "https://x.com/synklist",
+    "https://github.com/AnirudhGirish/SynkList",     // replace with real URLs you control
+    "https://x.com/SynkList",
     "https://www.linkedin.com/company/synklist",
+    "https://www.instagram.com/synklist"
   ],
 };
-
-
   return (
     <html lang="en">
       {/* Put JSON-LD inside <head>. Avoid <Script> directly under <html>. */}

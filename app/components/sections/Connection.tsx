@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { User, CheckSquare } from "lucide-react";
 import SystemFlowDiagramWireframe from "@/components/SVGanim";
+import Image from "next/image";
 
 const SystemFlowDiagram = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -111,8 +112,11 @@ const SystemFlowDiagram = () => {
             center through WhatsApp.
           </p>
         </motion.div>
-        <div className="mt-[-6rem] lg:mt-[-10rem]">
+        <div className="hidden lg:block mt-[-6rem] lg:mt-[-10rem]">
           <SystemFlowDiagramWireframe />
+        </div>
+        <div className="flex lg:hidden mt-[-1.5rem] mb-[1.5rem] justify-center">
+          <Image alt="Flow Diagram" src={"/svg.png"} width={500} height={500}/>
         </div>
 
         {/* Flow explanation */}
