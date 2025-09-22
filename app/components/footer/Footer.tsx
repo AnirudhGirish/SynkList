@@ -295,11 +295,10 @@ export default function Footer() {
       </div>
       <div className="text-xs text-zinc-50 flex justify-center">
         Looking for{" "}
-        <Link
-          href="/synclist"
+        <span
         >
           Synclist (often misspelled) — SynkList
-        </Link>
+        </span>
         ?
       </div>
     </footer>
