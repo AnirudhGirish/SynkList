@@ -13,7 +13,6 @@ export default function Footer() {
   const [buildNumber, setBuildNumber] = useState<string | null>(null);
 
   useEffect(() => {
-    // Update system time every second
     const updateTime = () => {
       const now = new Date();
       setSystemTime(
@@ -27,7 +26,6 @@ export default function Footer() {
     updateTime();
     const interval = setInterval(updateTime, 1000);
 
-    // Set build number once at client render
     setBuildNumber(
       Math.floor(Date.now() / 1000)
         .toString()

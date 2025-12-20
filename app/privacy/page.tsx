@@ -7,20 +7,6 @@ import { IconBrandWhatsapp, IconBrandMeta } from "@tabler/icons-react";
 import ScrollToTopCircle from "@/components/Scroll";
 import KeyScroller from "@/components/KeyScroll";
 
-// ---- NOTE: Key mobile fixes ----
-// 1) Ensure background stays behind content using -z-10 and wrapper relative
-// 2) Higher contrast fallbacks on mobile (no transparent text unless md+)
-// 3) useInView threshold lowered for small screens
-// 4) Replace dynamic Tailwind color strings with a static class map
-// 5) Fix a few invalid Tailwind classes (e.g. border-black-500 -> border-neutral-500)
-
-const colorClassMap: Record<string, string> = {
-  emerald: "from-emerald-100/80 to-emerald-200/60 border-emerald-300/50",
-  blue: "from-blue-100/80 to-blue-200/60 border-blue-300/50",
-  purple: "from-purple-100/80 to-purple-200/60 border-purple-300/50",
-  orange: "from-orange-100/80 to-orange-200/60 border-orange-300/50",
-  green: "from-green-100/80 to-green-200/60 border-green-300/50",
-};
 
 const PrivacyPolicyPage = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +14,6 @@ const PrivacyPolicyPage = () => {
   const [glitchActive, setGlitchActive] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
 
-  // Periodic effects
   useEffect(() => {
     const glitchInterval = setInterval(() => {
       setGlitchActive(true);

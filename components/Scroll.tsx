@@ -1,3 +1,4 @@
+// ./components/Scroll.tsx
 "use client";
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
@@ -15,15 +16,15 @@ export default function ScrollToTopCircle() {
 
       const progress = windowHeight > 0 ? totalScroll / windowHeight : 0;
 
-      setScrollProgress(Math.min(Math.max(progress, 0), 1)); // clamp between 0 and 1
+      setScrollProgress(Math.min(Math.max(progress, 0), 1));
     };
 
     window.addEventListener("scroll", updateProgress);
-    updateProgress(); // run once on mount
+    updateProgress();
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
-  const size = 64; // px
+  const size = 64;
   const strokeWidth = 4;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -42,7 +43,6 @@ export default function ScrollToTopCircle() {
       style={{ width: size, height: size }}
       aria-label="Scroll to top"
     >
-      {/* Progress circle */}
       <svg
         className="absolute inset-0 rotate-[-90deg]"
         width={size}
@@ -70,7 +70,6 @@ export default function ScrollToTopCircle() {
         />
       </svg>
 
-      {/* Arrow */}
       <ArrowUp className="relative z-10 w-5 h-5 text-neutral-900" />
     </motion.button>
   );

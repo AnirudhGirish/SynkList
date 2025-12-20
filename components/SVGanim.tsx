@@ -1,4 +1,6 @@
+// ./comonents/SVGanim.tsx
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -28,8 +30,7 @@ export default function SystemFlowDiagramWireframe() {
     return () => clearInterval(flow);
   }, []);
 
-  // Detect Safari on client only. Default to SVG-only boxes for SSR + first render
-  // to keep server and client HTML identical during hydration.
+  //chatgpt
   const [isSafari, setIsSafari] = useState<boolean | null>(null);
   useEffect(() => {
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
@@ -37,7 +38,6 @@ export default function SystemFlowDiagramWireframe() {
     setIsSafari(safari);
   }, []);
 
-  // Layout coordinates
   const layout = useMemo(
     () => ({
       user: { x: 1, y: -300 },
@@ -63,7 +63,6 @@ export default function SystemFlowDiagramWireframe() {
     []
   );
 
-  // Connection path
   function Connection({ from, to }: { from: { x: number; y: number }, to: { x: number; y: number } }) {
     const midX = (from.x + to.x) / 2;
     const pathD = `M ${from.x},${from.y} C ${midX},${from.y} ${midX},${to.y} ${to.x},${to.y}`;
@@ -82,7 +81,6 @@ export default function SystemFlowDiagramWireframe() {
     );
   }
 
-  // Safari-safe box
   function SvgBox({ x, y, label, main }: { x:number, y:number, label:string, main?:boolean }) {
     const width = main ? 160 : 120;
     const height = main ? 70 : 60;
@@ -113,7 +111,6 @@ export default function SystemFlowDiagramWireframe() {
     )
   }
 
-  // Original foreignObject box
   function HtmlBox({ x, y, label, icon, logo, main }: { 
     x:number, y:number, label:string, icon?:React.ReactNode, logo?:React.ReactNode, main?:boolean 
   }) {
@@ -170,19 +167,12 @@ export default function SystemFlowDiagramWireframe() {
           </linearGradient>
         </defs>
 
-        {/* Connections */}
         <Connection from={layout.user} to={layout.whatsapp}/>
         <Connection from={layout.whatsapp} to={layout.synklist}/>
         {layout.ai.map((n)=> <Connection key={n.id} from={layout.synklist} to={n}/>)}
         {layout.integrations.map((n)=> <Connection key={n.id} from={layout.synklist} to={n}/>)}
         {layout.bottom.map((n)=> <Connection key={n.id} from={layout.synklist} to={n}/>)}
-
-        {/* Nodes */}
-        {/*
-          Render SVG boxes by default (SSR and first client render) to keep
-          markup stable for hydration. After mount, if we detect non-Safari,
-          switch to HTML boxes which use foreignObject for richer styling.
-        */}
+{/* chatgpt */}
         {isSafari === false ? (
           <>
             <HtmlBox x={layout.user.x} y={layout.user.y} label="User" icon={<User size={20}/>}/>

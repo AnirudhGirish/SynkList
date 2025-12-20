@@ -1,6 +1,7 @@
+// next.config.ts
 /** @type {import('next').NextConfig} */
 module.exports = {
-  productionBrowserSourceMaps: true,  // keep if you want Lighthouse to see source maps
+  productionBrowserSourceMaps: true,
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "synklist.com" },
@@ -13,12 +14,18 @@ module.exports = {
       style-src 'self' 'unsafe-inline';
       img-src 'self' data: blob:;
       font-src 'self' data:;
-      connect-src 'self' https://graph.facebook.com https://*.whatsapp.com https://api.openai.com;
+      connect-src 'self' 
+        https://*.supabase.co 
+        https://osegxzeqvymxphqipmio.supabase.co
+        https://accounts.google.com
+        https://graph.facebook.com 
+        https://*.whatsapp.com 
+        https://api.openai.com;
       frame-ancestors 'none';
       base-uri 'self';
       form-action 'self';
     `.replace(/\s{2,}/g, " ").trim();
-
+    
     return [{
       source: "/:path*",
       headers: [
@@ -30,13 +37,9 @@ module.exports = {
       ],
     }];
   },
-
-  // Turbopack-specific options live under `turbopack`
   turbopack: {
-    // Example: resolve aliases (replacement for webpack resolve.alias)
     resolveAlias: {
       underscore: "lodash",
     },
-    // You can add rules here as Turbopack supports more hooks over time.
   },
 };

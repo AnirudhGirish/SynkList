@@ -8,7 +8,7 @@ export const config = {
 export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
 
-  // Force HTTPS (mostly for self-host; Vercel handles this already)
+
   const proto = req.headers.get("x-forwarded-proto");
   if (proto && proto !== "https") {
     url.protocol = "https:";

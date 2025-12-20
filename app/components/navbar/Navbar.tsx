@@ -10,7 +10,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
-const mouseX = useMotionValue(0);
+  const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { damping: 25, stiffness: 700 };
   const x = useSpring(mouseX, springConfig);
@@ -48,7 +48,6 @@ const mouseX = useMotionValue(0);
         transition={{ duration: 0.05 }}
       />
 
-      {/* Mobile menu overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -76,7 +75,6 @@ const mouseX = useMotionValue(0);
           }`}
           layout
         >
-          {/* Corner accents for floating state */}
           <AnimatePresence>
             {scrolled && (
               <>
@@ -117,7 +115,6 @@ const mouseX = useMotionValue(0);
               scrolled ? "px-8 py-4" : "px-6 py-4"
             }`}
           >
-            {/* Logo */}
             <Link href="/" className="relative group items-center inline-flex transition-all duration-600 ease-out">
               <Image alt="SynkList Logo" src={"/icon-512.png"} width={45} height={45}/>
               <motion.h1
@@ -129,7 +126,6 @@ const mouseX = useMotionValue(0);
               </motion.h1>
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               <nav className="flex items-center gap-6">
                 {navItems.map((item, index) => (
@@ -145,7 +141,6 @@ const mouseX = useMotionValue(0);
                     >
                       {item.name}
                       
-                      {/* Subtle underline */}
                       <motion.div
                         className="absolute bottom-0 left-4 right-4 h-px bg-zinc-600"
                         initial={{ scaleX: 0, opacity: 0 }}
@@ -160,43 +155,44 @@ const mouseX = useMotionValue(0);
                 ))}
               </nav>
 
-              {/* CTA Button */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
-                <div className="relative px-6 py-2.5 text-sm font-medium text-zinc-800 rounded-xl border border-zinc-300/70 bg-gradient-to-b from-zinc-100/90 to-zinc-200/60 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden">
-                  <span className="relative z-10">Coming Soon</span>
-                  
-                  {/* Scanning line effect */}
-                  <motion.div
-                    className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/60 to-transparent"
-                    animate={{
-                      x: ['-100%', '100%']
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/60 to-transparent"
-                    animate={{
-                      x: ['100%', '-100%']
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </div>
-              </motion.div>
+              {/* Login Button */}
+              <Link href="/login">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className="group relative overflow-hidden"
+                >
+                  <div className="relative px-6 py-2.5 text-sm font-medium text-white rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-200 cursor-pointer overflow-hidden">
+                    <span className="relative z-10">Login</span>
+                    
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
+                      animate={{
+                        x: ['-100%', '100%']
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
+                      animate={{
+                        x: ['100%', '-100%']
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              </Link>
             </div>
 
-            {/* Mobile menu button */}
             <motion.button
               className="lg:hidden relative w-10 h-10 rounded-lg bg-zinc-100/80 border border-zinc-200/60 flex items-center justify-center"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -230,7 +226,6 @@ const mouseX = useMotionValue(0);
           </div>
         </motion.div>
 
-        {/* Mobile Navigation Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -242,7 +237,6 @@ const mouseX = useMotionValue(0);
             >
               <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-zinc-200/60 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.15)] overflow-hidden">
                 
-                {/* Corner accents */}
                 <div className="absolute top-3 left-3 w-3 h-3 border-l border-t border-zinc-400/40" />
                 <div className="absolute top-3 right-3 w-3 h-3 border-r border-t border-zinc-400/40" />
                 <div className="absolute bottom-3 left-3 w-3 h-3 border-l border-b border-zinc-400/40" />
@@ -268,20 +262,21 @@ const mouseX = useMotionValue(0);
                     ))}
                   </nav>
 
-                  {/* Mobile CTA */}
+                  {/* Mobile Login Button */}
                   <motion.div
                     className="mt-6 pt-4 border-t border-zinc-200/50"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3,  duration: 0.3,ease: "easeInOut" }}
                   >
-                    <div className="px-6 py-3 text-sm font-medium text-zinc-800 text-center rounded-xl border border-zinc-300/70 bg-gradient-to-b from-zinc-100/90 to-zinc-200/60 shadow-sm">
-                      Comming Soon
-                    </div>
+                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="px-6 py-3 text-sm font-medium text-white text-center rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200">
+                        Login
+                      </div>
+                    </Link>
                   </motion.div>
                 </div>
 
-                {/* Scanning line */}
                 <motion.div
                   className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/40 to-transparent"
                   animate={{

@@ -10,7 +10,6 @@ const NotFoundPage = () => {
   const [glitchActive, setGlitchActive] = useState(false);
   const [scanActive, setScanActive] = useState(false);
 
-  // Periodic effects
   useEffect(() => {
     const glitchInterval = setInterval(() => {
       setGlitchActive(true);
@@ -30,7 +29,6 @@ const NotFoundPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-zinc-50/30 to-white flex items-center justify-center">
-      {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute inset-0 opacity-[0.02]"
@@ -52,14 +50,12 @@ const NotFoundPage = () => {
 
       <main ref={containerRef} className="relative px-6 py-20 w-full max-w-4xl mx-auto text-center">
         
-        {/* System Alert */}
         <motion.div
           className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-br from-zinc-100/70 via-white/60 to-zinc-100/70 border border-zinc-200/60 backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] mb-12 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
         >
-          {/* Corner accents */}
           <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-zinc-400/40" />
           <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-zinc-400/40" />
           <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-zinc-400/40" />
@@ -81,7 +77,6 @@ const NotFoundPage = () => {
           </span>
         </motion.div>
 
-        {/* 404 Display */}
         <motion.div
           className="mb-12"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -129,7 +124,6 @@ const NotFoundPage = () => {
           </motion.p>
         </motion.div>
 
-        {/* System Diagnostic */}
         <motion.div
           className="relative mb-12"
           initial={{ opacity: 0, y: 40 }}
@@ -143,7 +137,6 @@ const NotFoundPage = () => {
             <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-zinc-400/50 rounded-bl-lg" />
             <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-zinc-400/50 rounded-br-lg" />
 
-            {/* Scanning effect */}
             <motion.div
               className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-600/40 to-transparent"
               animate={
@@ -169,9 +162,7 @@ const NotFoundPage = () => {
                 </p>
               </div>
 
-              {/* Error visualization */}
               <div className="relative h-32 flex items-center justify-center mb-8">
-                {/* Central error indicator */}
                 <motion.div
                   className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-zinc-200/80 to-zinc-300/60 border-2 border-zinc-400/40 flex items-center justify-center backdrop-blur-sm"
                   animate={{
@@ -185,7 +176,6 @@ const NotFoundPage = () => {
                 >
                   <AlertTriangle size={24} className="text-zinc-700" />
 
-                  {/* Error rings */}
                   <motion.div
                     className="absolute inset-[-4px] rounded-2xl border border-zinc-500/30"
                     animate={{
@@ -213,7 +203,6 @@ const NotFoundPage = () => {
                 </motion.div>
               </div>
 
-              {/* Error details */}
               <div className="grid md:grid-cols-3 gap-4 text-sm">
                 <div className="p-4 rounded-xl bg-white/60 border border-zinc-200/50">
                   <div className="font-medium text-zinc-800 mb-1">Status Code</div>
@@ -230,7 +219,6 @@ const NotFoundPage = () => {
               </div>
             </div>
 
-            {/* Status bar */}
             <div className="relative border-t border-zinc-200/40 bg-white/40 px-8 py-4">
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
@@ -257,14 +245,12 @@ const NotFoundPage = () => {
           </div>
         </motion.div>
 
-        {/* Recovery Options */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          {/* Home Button */}
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -276,8 +262,6 @@ const NotFoundPage = () => {
             >
               <Home size={18} className="group-hover:scale-110 transition-transform duration-200" />
               Return Home
-              
-              {/* Scan line */}
               <motion.div
                 className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/60 to-transparent opacity-0 group-hover:opacity-100"
                 animate={{
@@ -292,7 +276,6 @@ const NotFoundPage = () => {
             </Link>
           </motion.div>
 
-          {/* Back Button */}
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -307,7 +290,6 @@ const NotFoundPage = () => {
             </button>
           </motion.div>
 
-          {/* Search Button */}
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -323,7 +305,6 @@ const NotFoundPage = () => {
           </motion.div>
         </motion.div>
 
-        {/* System Info */}
         <motion.div
           className="mt-16 text-center"
           initial={{ opacity: 0 }}

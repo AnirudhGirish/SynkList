@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     title: "SynkList — AI Command Center in WhatsApp",
     description:
       "Summarize mail, schedule, search docs, and act across your stack from WhatsApp.",
-    // Use the dynamic OG route below
     images: ["/opengraph-image"],
   },
   twitter: {
@@ -57,7 +56,6 @@ export const metadata: Metadata = {
     },
   },
   category: "productivity",
-  // Manifest route below; keep only one manifest source (this OR a public file)
   manifest: "/manifest.webmanifest",
 };
 
@@ -71,7 +69,6 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // inside your orgLd object in app/layout.tsx
 const orgLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -80,7 +77,7 @@ const orgLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/icon-512.png`,
   sameAs: [
-    "https://github.com/AnirudhGirish/SynkList",     // replace with real URLs you control
+    "https://github.com/AnirudhGirish/SynkList",
     "https://x.com/SynkList",
     "https://www.linkedin.com/company/synklist",
     "https://www.instagram.com/synklist"
@@ -88,7 +85,6 @@ const orgLd = {
 };
   return (
     <html lang="en">
-      {/* Put JSON-LD inside <head>. Avoid <Script> directly under <html>. */}
       <head >
         <meta name="google-site-verification" content="K2jWKm-j5XRdLkvthe7qEjmo-Qv49E81CsUXxDEOvPA" />
         <script

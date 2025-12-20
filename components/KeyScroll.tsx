@@ -1,10 +1,9 @@
+// ./components/KeyScroll,tsx
 "use client";
 import { useEffect } from "react";
 
 type Props = {
-  /** How many pixels to scroll per press (default ~25% of viewport, min 200px) */
   amountPx?: number;
-  /** Disable listener (e.g., while a modal is open) */
   disabled?: boolean;
 };
 
@@ -40,10 +39,9 @@ export default function KeyScroller({ amountPx, disabled = false }: Props) {
       const fallback = Math.max(200, Math.round(window.innerHeight * 0.25));
       const step = amountPx ?? fallback;
 
-      // Handle keys
       switch (e.key) {
         case " ":
-        case "Spacebar": // legacy
+        case "Spacebar":
           e.preventDefault();
           window.scrollBy({
             top: (e.shiftKey ? -1 : 1) * step,

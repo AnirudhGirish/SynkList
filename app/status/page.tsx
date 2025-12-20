@@ -17,19 +17,15 @@ const StatusPage = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const [glitchActive, setGlitchActive] = useState(false);
-  // Avoid SSR/client mismatch: render no time on server/first paint,
-  // then populate on client after mount.
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [activeService, setActiveService] = useState(0);
 
-  // Periodic effects
   useEffect(() => {
     const glitchInterval = setInterval(() => {
       setGlitchActive(true);
       setTimeout(() => setGlitchActive(false), 120);
     }, 15000);
 
-    // Set initial client time on mount, then tick
     setCurrentTime(new Date());
     const timeInterval = setInterval(() => setCurrentTime(new Date()), 1000);
 

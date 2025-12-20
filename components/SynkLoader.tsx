@@ -1,11 +1,12 @@
+// ./comonents/SynkLoarder.tsx
 "use client";
 import { motion } from "framer-motion";
 import React from "react";
 
 interface SynklistLoaderProps {
-  size?: number; // dot size
-  color?: string; // tailwind color classes
-  text?: string; // optional label (e.g., "Joining...")
+  size?: number;
+  color?: string;
+  text?: string;
 }
 
 const SynklistLoader: React.FC<SynklistLoaderProps> = ({

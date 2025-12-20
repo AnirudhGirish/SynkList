@@ -10,7 +10,6 @@ const AboutPage = () => {
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const [glitchActive, setGlitchActive] = useState(false);
 
-  // Periodic effects
   useEffect(() => {
     const glitchInterval = setInterval(() => {
       setGlitchActive(true);
@@ -30,7 +29,6 @@ const AboutPage = () => {
         <ScrollToTopCircle />
       </div>
 
-      {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute inset-0 opacity-[1]"
@@ -51,10 +49,8 @@ const AboutPage = () => {
       </div>
 
       <main ref={containerRef} className="relative">
-        {/* Hero Section */}
         <section className="relative py-20 px-6">
           <div className="max-w-6xl mx-auto">
-            {/* Page Header */}
             <motion.div
               className="text-center mb-16"
               initial={{ opacity: 0, y: 40 }}
@@ -77,7 +73,6 @@ const AboutPage = () => {
                 }
                 transition={{ duration: 0.12 }}
               >
-                {/* Corner accents */}
                 <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-zinc-400/40" />
                 <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-zinc-400/40" />
                 <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-zinc-400/40" />
@@ -121,7 +116,6 @@ const AboutPage = () => {
               </p>
             </motion.div>
 
-            {/* Company Visualization */}
             <motion.div
               className="relative mb-20"
               initial={{ opacity: 0, y: 60 }}
@@ -129,13 +123,11 @@ const AboutPage = () => {
               transition={{ duration: 1, delay: 0.3 }}
             >
               <div className="relative rounded-3xl bg-gradient-to-br from-zinc-100/60 via-white/40 to-zinc-100/60 backdrop-blur-xl border border-zinc-200/60 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden">
-                {/* Corner accents */}
                 <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-zinc-400/50 rounded-tl-lg" />
                 <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-zinc-400/50 rounded-tr-lg" />
                 <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-zinc-400/50 rounded-bl-lg" />
                 <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-zinc-400/50 rounded-br-lg" />
 
-                {/* Active scanning effect */}
                 <motion.div
                   className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-600/40 to-transparent"
                   animate={{
@@ -161,9 +153,7 @@ const AboutPage = () => {
                     </p>
                   </div>
 
-                  {/* Mission visualization */}
                   <div className="relative h-80 flex items-center justify-center">
-                    {/* Central mission hub */}
                     <motion.div
                       className="relative w-32 h-32 rounded-3xl bg-gradient-to-br from-zinc-200/80 to-zinc-300/60 border-2 border-zinc-400/40 flex items-center justify-center backdrop-blur-sm"
                       animate={{
@@ -179,7 +169,6 @@ const AboutPage = () => {
                         <Users size={24} className="text-white" />
                       </motion.div>
 
-                      {/* Mission rings */}
                       <motion.div
                         className="absolute inset-4 rounded-2xl border border-zinc-500/30"
                         animate={{
@@ -192,7 +181,6 @@ const AboutPage = () => {
                         }}
                       />
 
-                      {/* Vision ring */}
                       <motion.div
                         className="absolute inset-0 rounded-3xl border-2 border-zinc-400/20"
                         animate={{
@@ -206,7 +194,6 @@ const AboutPage = () => {
                         }}
                       />
 
-                      {/* Impact ring */}
                       <motion.div
                         className="absolute inset-[-8px] rounded-3xl border border-zinc-300/15"
                         animate={{
@@ -223,7 +210,6 @@ const AboutPage = () => {
                   </div>
 
                   <div className="flex flex-col lg:flex-row gap-6 items-center justify-center lg:mt-[-3rem]">
-                    {/* Core values */}
                     {[
                       "Privacy First",
                       "User-Centric",
@@ -251,7 +237,6 @@ const AboutPage = () => {
                   </div>
                 </div>
 
-                {/* Status bar */}
                 <div className="relative border-t border-zinc-200/40 bg-white/40 px-8 py-4">
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
@@ -280,7 +265,6 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Coming Soon Section */}
         <section className="relative py-20 px-6 border-t border-zinc-200/40">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -289,7 +273,6 @@ const AboutPage = () => {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 1.5, duration: 0.6 }}
             >
-              {/* Corner accents */}
               <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-zinc-400/40" />
               <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-zinc-400/40" />
               <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-zinc-400/40" />

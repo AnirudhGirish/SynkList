@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-// app/synclist/page.tsx
 export const metadata = {
   title: "Synclist (SynkList)",
   description:
