@@ -1,14 +1,20 @@
 "use client";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  const supabase = createClient();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -16,6 +22,21 @@ const Navbar = () => {
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
 
+  // Check auth state
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+      setLoadingAuth(false);
+    };
+    checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -155,42 +176,45 @@ const Navbar = () => {
                 ))}
               </nav>
 
-              {/* Login Button */}
-              <Link href="/login">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="group relative overflow-hidden"
-                >
-                  <div className="relative px-6 py-2.5 text-sm font-medium text-white rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-200 cursor-pointer overflow-hidden">
-                    <span className="relative z-10">Login</span>
-                    
-                    <motion.div
-                      className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
-                      animate={{
-                        x: ['-100%', '100%']
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
-                      animate={{
-                        x: ['100%', '-100%']
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
+              {/* Login/Dashboard Button */}
+              {!loadingAuth && (
+                <Link href={user ? "/dashboard" : "/login"}>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="group relative overflow-hidden"
+                  >
+                    <div className="relative px-6 py-2.5 text-sm font-medium text-white rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-200 cursor-pointer overflow-hidden flex items-center gap-2">
+                      {user && <LayoutDashboard size={16} />}
+                      <span className="relative z-10">{user ? "Dashboard" : "Login"}</span>
+                      
+                      <motion.div
+                        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
+                        animate={{
+                          x: ['-100%', '100%']
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500 to-transparent"
+                        animate={{
+                          x: ['100%', '-100%']
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
                     />
                   </div>
                 </motion.div>
               </Link>
+              )}
             </div>
 
             <motion.button
@@ -262,19 +286,22 @@ const Navbar = () => {
                     ))}
                   </nav>
 
-                  {/* Mobile Login Button */}
-                  <motion.div
-                    className="mt-6 pt-4 border-t border-zinc-200/50"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3,  duration: 0.3,ease: "easeInOut" }}
-                  >
-                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="px-6 py-3 text-sm font-medium text-white text-center rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200">
-                        Login
-                      </div>
-                    </Link>
-                  </motion.div>
+                  {/* Mobile Login/Dashboard Button */}
+                  {!loadingAuth && (
+                    <motion.div
+                      className="mt-6 pt-4 border-t border-zinc-200/50"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3,  duration: 0.3,ease: "easeInOut" }}
+                    >
+                      <Link href={user ? "/dashboard" : "/login"} onClick={() => setMobileMenuOpen(false)}>
+                        <div className="px-6 py-3 text-sm font-medium text-white text-center rounded-xl bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200 flex items-center justify-center gap-2">
+                          {user && <LayoutDashboard size={16} />}
+                          {user ? "Dashboard" : "Login"}
+                        </div>
+                      </Link>
+                    </motion.div>
+                  )}
                 </div>
 
                 <motion.div
