@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 const PROD_HOST = "synklist.com"; // change if you prefer www
 
 // Routes that require authentication
-const PROTECTED_ROUTES = ["/dashboard"];
+const PROTECTED_ROUTES = ["/dashboard", "/notifications"];
 
 // Routes that should redirect to dashboard if already authenticated
 const AUTH_ROUTES = ["/login"];

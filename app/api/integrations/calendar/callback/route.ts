@@ -12,15 +12,13 @@ export async function GET(request: Request) {
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-  // Handle errors from Google
   if (error) {
-    console.error("Google OAuth error:", error);
+    console.error("Google Calendar OAuth error:", error);
     return NextResponse.redirect(
-      `${baseUrl}/dashboard?error=${encodeURIComponent("Google authorization was denied")}`
+      `${baseUrl}/dashboard?error=${encodeURIComponent("Calendar authorization was denied")}`
     );
   }
 
-  // Validate required params
   if (!code || !state) {
     return NextResponse.redirect(
       `${baseUrl}/dashboard?error=${encodeURIComponent("Missing authorization parameters")}`
@@ -44,9 +42,7 @@ export async function GET(request: Request) {
       );
     }
 
-    // Check if state has expired
     if (new Date(stateData.expires_at) < new Date()) {
-      // Clean up expired state
       await adminClient.from("oauth_states").delete().eq("state", state);
       return NextResponse.redirect(
         `${baseUrl}/dashboard?error=${encodeURIComponent("Authorization request expired. Please try again.")}`
@@ -54,7 +50,6 @@ export async function GET(request: Request) {
     }
 
     const userId = stateData.user_id;
-    const platformName = stateData.platform || "gmail"; // Default to gmail for backwards compatibility
 
     // Exchange code for tokens
     const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
@@ -67,7 +62,7 @@ export async function GET(request: Request) {
         client_secret: process.env.GOOGLE_CLIENT_SECRET!,
         code,
         grant_type: "authorization_code",
-        redirect_uri: `${baseUrl}/api/integrations/google/callback`,
+        redirect_uri: `${baseUrl}/api/integrations/calendar/callback`,
       }),
     });
 
@@ -76,7 +71,7 @@ export async function GET(request: Request) {
     if (tokenData.error) {
       console.error("Token exchange error:", tokenData);
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?error=${encodeURIComponent("Failed to complete Google authorization")}`
+        `${baseUrl}/dashboard?error=${encodeURIComponent("Failed to complete Calendar authorization")}`
       );
     }
 
@@ -95,18 +90,17 @@ export async function GET(request: Request) {
       );
     }
 
-    // Calculate token expiry
     const expiresAt = tokenData.expires_in
       ? Math.floor(Date.now() / 1000) + tokenData.expires_in
       : null;
 
-    // Store or update platform connection
+    // Store calendar connection separately from gmail
     const { error: upsertError } = await adminClient
       .from("platform_connections")
       .upsert(
         {
           user_id: userId,
-          platform_name: platformName,
+          platform_name: "calendar", // Separate platform name
           platform_user_id: userInfo.email,
           access_tokens: {
             access_token: tokenData.access_token,
@@ -127,17 +121,16 @@ export async function GET(request: Request) {
     if (upsertError) {
       console.error("Error storing connection:", upsertError);
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?error=${encodeURIComponent("Failed to save Google connection")}`
+        `${baseUrl}/dashboard?error=${encodeURIComponent("Failed to save Calendar connection")}`
       );
     }
 
     // Clean up used state
     await adminClient.from("oauth_states").delete().eq("state", state);
 
-    // Redirect to dashboard with success
-    return NextResponse.redirect(`${baseUrl}/dashboard?${platformName}_connected=true`);
+    return NextResponse.redirect(`${baseUrl}/dashboard?calendar_connected=true`);
   } catch (error) {
-    console.error("Error in Google callback:", error);
+    console.error("Error in Calendar callback:", error);
     return NextResponse.redirect(
       `${baseUrl}/dashboard?error=${encodeURIComponent("An unexpected error occurred")}`
     );

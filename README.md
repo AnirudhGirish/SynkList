@@ -417,3 +417,6 @@ Security Policy - Vulnerability Disclosure
 
 > Built with privacy-first principles and enterprise-grade security  
 > **SynkList** - Where AI meets productivity, privately.
+
+---
+Team Contact: synklist@gmail.com

@@ -7,10 +7,10 @@ export async function POST(request: Request) {
     const supabase = await createClient();
     const adminClient = createAdminClient();
 
-    // Check if user is authenticated
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    // Check if user is authenticated - using getUser() for security
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
     
-    if (sessionError || !session) {
+    if (userError || !user) {
       return NextResponse.json(
         { error: "Unauthorized. Please log in first." },
         { status: 401 }
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       .from("messages")
       .select("id")
       .eq("external_id", id)
-      .eq("user_id", session.user.id)
+      .eq("user_id", user.id)
       .single();
 
     if (existingMessage) {
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       .from("messages")
       .insert({
         platform_connection_id: platformConnectionId,
-        user_id: session.user.id,
+        user_id: user.id,
         external_id: id,
         sender: senderEmail || sender,
         subject: subject || "(No Subject)",
@@ -97,10 +97,10 @@ export async function DELETE(request: Request) {
     const supabase = await createClient();
     const adminClient = createAdminClient();
 
-    // Check if user is authenticated
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    // Check if user is authenticated - using getUser() for security
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
     
-    if (sessionError || !session) {
+    if (userError || !user) {
       return NextResponse.json(
         { error: "Unauthorized. Please log in first." },
         { status: 401 }
@@ -123,7 +123,7 @@ export async function DELETE(request: Request) {
       .from("messages")
       .delete()
       .eq("external_id", externalId)
-      .eq("user_id", session.user.id);
+      .eq("user_id", user.id);
 
     if (deleteError) {
       console.error("Error unpinning message:", deleteError);
@@ -148,10 +148,10 @@ export async function GET() {
   try {
     const supabase = await createClient();
 
-    // Check if user is authenticated
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    // Check if user is authenticated - using getUser() for security
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
     
-    if (sessionError || !session) {
+    if (userError || !user) {
       return NextResponse.json(
         { error: "Unauthorized. Please log in first." },
         { status: 401 }
@@ -162,7 +162,7 @@ export async function GET() {
     const { data: pinnedMessages, error: fetchError } = await supabase
       .from("messages")
       .select("*")
-      .eq("user_id", session.user.id)
+      .eq("user_id", user.id)
       .eq("status", "starred")
       .order("message_date", { ascending: false });
 

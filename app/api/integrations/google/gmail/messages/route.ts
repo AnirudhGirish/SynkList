@@ -106,28 +106,28 @@ export async function GET() {
     const supabase = await createClient();
     const adminClient = createAdminClient();
 
-    // Check if user is authenticated
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    // Check if user is authenticated - using getUser() for security
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
     
-    if (sessionError || !session) {
+    if (userError || !user) {
       return NextResponse.json(
         { error: "Unauthorized. Please log in first." },
         { status: 401 }
       );
     }
 
-    // Get Google connection
+    // Get Gmail connection
     const { data: connection, error: connectionError } = await adminClient
       .from("platform_connections")
       .select("*")
-      .eq("user_id", session.user.id)
-      .eq("platform_name", "google")
+      .eq("user_id", user.id)
+      .eq("platform_name", "gmail")
       .eq("is_active", true)
       .single();
 
     if (connectionError || !connection) {
       return NextResponse.json(
-        { error: "Google account not connected. Please connect your Google account first." },
+        { error: "Gmail not connected. Please connect your Gmail first." },
         { status: 400 }
       );
     }

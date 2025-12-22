@@ -5,8 +5,8 @@ import crypto from "crypto";
 
 const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const SCOPES = [
-  "https://www.googleapis.com/auth/gmail.readonly",
   "https://www.googleapis.com/auth/calendar.readonly",
+  "https://www.googleapis.com/auth/calendar.events.readonly",
   "https://www.googleapis.com/auth/userinfo.email",
   "https://www.googleapis.com/auth/userinfo.profile",
 ].join(" ");
@@ -16,7 +16,6 @@ export async function GET() {
     const supabase = await createClient();
     const adminClient = createAdminClient();
 
-    // Check if user is authenticated - using getUser() for security
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     
     if (userError || !user) {
@@ -26,17 +25,15 @@ export async function GET() {
       );
     }
 
-    // Generate state for CSRF protection
     const state = crypto.randomBytes(32).toString("hex");
-
-    // Store state in database with expiry
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
     
     const { error: stateError } = await adminClient
       .from("oauth_states")
       .insert({
         state,
         user_id: user.id,
+        platform: "calendar", // Track which platform this is for
         expires_at: expiresAt.toISOString(),
       });
 
@@ -48,22 +45,20 @@ export async function GET() {
       );
     }
 
-    // Build Google OAuth URL
     const params = new URLSearchParams({
       client_id: process.env.GOOGLE_CLIENT_ID!,
-      redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/integrations/google/callback`,
+      redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/integrations/calendar/callback`,
       response_type: "code",
       scope: SCOPES,
       state,
       access_type: "offline",
-      prompt: "consent", // Force consent to get refresh token
+      prompt: "consent",
     });
 
     const authUrl = `${GOOGLE_AUTH_URL}?${params.toString()}`;
-
     return NextResponse.json({ url: authUrl });
   } catch (error) {
-    console.error("Error in Google authorize:", error);
+    console.error("Error in Calendar authorize:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
